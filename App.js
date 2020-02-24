@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Home from './src/Home';
-import LoginForm from './src/LoginForm';
-import SignUp from './src/SignUp';
+import {createStackNavigator, StackNavigator} from '@react-navigation/stack';
+
+import ChatList from './src/Chat/ChatList';
+import SignIn from './src/Auth/SignIn';
+import SignUp from './src/Auth/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -11,9 +12,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={LoginForm} title="SignIn" />
-        <Stack.Screen name="Home" component={Home} title="Home" />
-        <Stack.Screen name="SignUp" component={SignUp} title="SignUp" />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen
+          name="ChatList"
+          component={ChatList}
+          options={{headerLeft: null, title: 'Chats'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,19 +5,35 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import firebase from './Firebase';
 
 export default class SignUp extends Component {
   state = {
     code: '',
-    phone: AsyncStorage.getItem('userPhone'),
+    phone: '',
     name: '',
+    confirmResult: '',
   };
 
-  handerChange = key => val => {
+  handlerChange = key => val => {
     this.setState({[key]: val});
+  };
+
+  submitHandler = async () => {
+    if (!this.confirmResult) {
+      if (this.state.phone.length != 13) {
+        Alert.alert('Error', 'Wrong phone number');
+      } else if (this.state.name.length < 3 || this.state.name.length > 12) {
+        Alert.alert('Error', 'Allowed name length is 3-12 symbols');
+      } else {
+        Alert.alert('Verification', 'Enter code from sms');
+        this.setState({confirmResult: true});
+      }
+    } else {
+      this.props.navigation.navigate('ChatList');
+    }
   };
 
   render() {
@@ -28,21 +44,21 @@ export default class SignUp extends Component {
           keyboardType="number-pad"
           style={styles.input}
           value={this.state.phone}
-          onChangeText={this.handerChange('phone')}
+          onChangeText={this.handlerChange('phone')}
         />
         <TextInput
           placeholder={'Enter your name'}
           style={styles.input}
           value={this.state.name}
-          onChangeText={this.handerChange('name')}
+          onChangeText={this.handlerChange('name')}
         />
         <TextInput
-          placeholder={'Enter your name'}
+          placeholder={'Enter code from sms'}
           style={styles.input}
-          value={this.state.name}
-          onChangeText={this.handerChange('code')}
+          value={this.state.code}
+          onChangeText={this.handlerChange('code')}
         />
-        <TouchableOpacity onPress={this.submitHander} style={styles.btnBlock}>
+        <TouchableOpacity onPress={this.submitHandler} style={styles.btnBlock}>
           <Text style={styles.btnText}>Submit</Text>
         </TouchableOpacity>
       </View>

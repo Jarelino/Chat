@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import firebase from './Firebase';
 
-export default class LoginForm extends Component {
+export default class SignIn extends Component {
   state = {
     phone: '',
     name: '',
@@ -28,20 +27,13 @@ export default class LoginForm extends Component {
   };
 
   submitHandler = async () => {
-    if (this.state.phone.length != 12) {
+    if (this.state.phone.length != 13) {
       Alert.alert('Error', 'Wrong phone number');
     } else if (this.state.name.length < 3 || this.state.name.length > 12) {
       Alert.alert('Error', 'Allowed name length is 3-12 symbols');
     } else {
-      const navigate = this.props.navigation.navigate;
       AsyncStorage.setItem('userPhone', this.state.phone);
-      firebase
-        .auth()
-        .signInWithPhoneNumber(this.state.phone)
-        .then(confirmResult => navigate('Home'))
-        .catch(() =>
-          Alert.alert('Wrong data', 'User with this phone or name dont exist'),
-        );
+      this.props.navigation.navigate('ChatList');
     }
   };
 

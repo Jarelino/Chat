@@ -78,6 +78,7 @@ export default class Chat extends Component {
             style={styles.inputMsg}
             onChangeText={msg => this.setState({msg})}
             value={this.state.msg}
+            placeholderTextColor="#b6baba"
           />
           <Button
             color="#3685FA"

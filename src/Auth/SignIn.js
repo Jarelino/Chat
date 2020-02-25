@@ -11,10 +11,21 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
-  state = {
-    phone: '',
-    name: '',
-  };
+  constructor(props) {
+    super(props);
+    this.props.navigation.setOptions({
+      headerStyle: {
+        backgroundColor: '#233342FF',
+      },
+      headerTintColor: '#FFF',
+      headerLeft: null,
+      title: 'Chats',
+    });
+    this.state = {
+      phone: '',
+      name: '',
+    };
+  }
 
   handlerChange = key => val => {
     this.setState({
@@ -27,14 +38,16 @@ export default class SignIn extends Component {
   };
 
   submitHandler = async () => {
-    if (this.state.phone.length != 13) {
-      Alert.alert('Error', 'Wrong phone number');
-    } else if (this.state.name.length < 3 || this.state.name.length > 12) {
-      Alert.alert('Error', 'Allowed name length is 3-12 symbols');
-    } else {
-      AsyncStorage.setItem('userPhone', this.state.phone);
-      this.props.navigation.navigate('ChatList');
-    }
+    // if (this.state.phone.length != 13) {
+    //   Alert.alert('Error', 'Wrong phone number');
+    // } else if (this.state.name.length < 3 || this.state.name.length > 12) {
+    //   Alert.alert('Error', 'Allowed name length is 3-12 symbols');
+    // } else {
+    //   AsyncStorage.setItem('userPhone', this.state.phone);
+    //   this.props.navigation.navigate('ChatList');
+    // }
+
+    this.props.navigation.navigate('ChatList');
   };
 
   render() {
@@ -46,25 +59,21 @@ export default class SignIn extends Component {
           style={styles.input}
           value={this.state.phone}
           onChangeText={this.handlerChange('phone')}
+          placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter your name'}
           style={styles.input}
           value={this.state.name}
           onChangeText={this.handlerChange('name')}
+          placeholderTextColor="#b6baba"
         />
-        <View styles={styles.container}>
-          <TouchableOpacity
-            onPress={this.submitHandler}
-            style={styles.btnBlock}>
-            <Text style={styles.btnText}>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.signUpHandler}
-            style={styles.btnBlock}>
-            <Text style={styles.btnText}>SignUp</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={this.submitHandler} style={styles.btnBlock}>
+          <Text style={styles.btnText}>Submit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.signUpHandler} style={styles.btnBlock}>
+          <Text style={styles.btnText}>SignUp</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -73,19 +82,17 @@ export default class SignIn extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#272929',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  btnContainer: {
-    flex: 1,
-  },
   input: {
     padding: 10,
-    color: '#000',
+    color: '#FFF',
     width: '85%',
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: '#FFF',
     marginBottom: 10,
   },
   btnText: {

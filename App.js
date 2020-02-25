@@ -15,11 +15,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="ChatList"
-          component={ChatList}
-          options={{headerLeft: null, title: 'Chats'}}
-        />
+        <Stack.Screen name="ChatList" component={ChatList} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />

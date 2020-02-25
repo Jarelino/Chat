@@ -7,33 +7,44 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignUp extends Component {
-  state = {
-    code: '',
-    phone: '',
-    name: '',
-    confirmResult: '',
-  };
+  constructor(props) {
+    super(props);
+    this.props.navigation.setOptions({
+      headerStyle: {
+        backgroundColor: '#233342FF',
+      },
+      headerTintColor: '#FFF',
+      title: 'Chats',
+    });
+    this.state = {
+      code: '',
+      phone: '',
+      name: '',
+      confirmResult: '',
+    };
+  }
 
   handlerChange = key => val => {
     this.setState({[key]: val});
   };
 
   submitHandler = async () => {
-    if (!this.confirmResult) {
-      if (this.state.phone.length != 13) {
-        Alert.alert('Error', 'Wrong phone number');
-      } else if (this.state.name.length < 3 || this.state.name.length > 12) {
-        Alert.alert('Error', 'Allowed name length is 3-12 symbols');
-      } else {
-        Alert.alert('Verification', 'Enter code from sms');
-        this.setState({confirmResult: true});
-      }
-    } else {
-      this.props.navigation.navigate('ChatList');
-    }
+    // if (!this.confirmResult) {
+    //   if (this.state.phone.length != 13) {
+    //     Alert.alert('Error', 'Wrong phone number');
+    //   } else if (this.state.name.length < 3 || this.state.name.length > 12) {
+    //     Alert.alert('Error', 'Allowed name length is 3-12 symbols');
+    //   } else {
+    //     Alert.alert('Verification', 'Enter code from sms');
+    //     this.setState({confirmResult: true});
+    //   }
+    // } else {
+    //   this.props.navigation.navigate('ChatList');
+    // }
+
+    this.props.navigation.navigate('ChatList');
   };
 
   render() {
@@ -45,18 +56,21 @@ export default class SignUp extends Component {
           style={styles.input}
           value={this.state.phone}
           onChangeText={this.handlerChange('phone')}
+          placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter your name'}
           style={styles.input}
           value={this.state.name}
           onChangeText={this.handlerChange('name')}
+          placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter code from sms'}
           style={styles.input}
           value={this.state.code}
           onChangeText={this.handlerChange('code')}
+          placeholderTextColor="#b6baba"
         />
         <TouchableOpacity onPress={this.submitHandler} style={styles.btnBlock}>
           <Text style={styles.btnText}>Submit</Text>
@@ -69,16 +83,17 @@ export default class SignUp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#272929',
     alignItems: 'center',
     justifyContent: 'center',
   },
   input: {
     padding: 10,
-    color: '#000',
+    color: '#FFF',
     width: '85%',
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: '#FFF',
     marginBottom: 10,
   },
   btnText: {

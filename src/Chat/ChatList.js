@@ -13,10 +13,13 @@ export default class ChatList extends Component {
   constructor(props) {
     super(props);
     this.props.navigation.setOptions({
+      headerTintColor: '#FFF',
       headerStyle: {
         backgroundColor: '#233342FF',
       },
+      headerLeft: null,
     });
+
     this.state = {
       chats: [
         {

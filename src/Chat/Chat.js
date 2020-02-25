@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 
 export default class Chat extends Component {
   constructor(props) {
@@ -10,8 +10,10 @@ export default class Chat extends Component {
   render() {
     return (
       <View>
-        <Text>{this.title}</Text>
+        <Text>{this.props.route.params.title}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({});

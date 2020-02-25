@@ -12,6 +12,11 @@ import {FlatList} from 'react-native-gesture-handler';
 export default class ChatList extends Component {
   constructor(props) {
     super(props);
+    this.props.navigation.setOptions({
+      headerStyle: {
+        backgroundColor: '#233342FF',
+      },
+    });
     this.state = {
       chats: [
         {
@@ -45,7 +50,7 @@ export default class ChatList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.app}>
         <View>
           <FlatList
             data={this.state.chats}
@@ -60,8 +65,8 @@ export default class ChatList extends Component {
                   }}
                 />
                 <View>
-                  <Text style={styles.chat}>{item.title}</Text>
-                  <Text style={styles.chat}>{item.lastMsg}</Text>
+                  <Text style={styles.chatTitle}>{item.title}</Text>
+                  <Text style={styles.lastMsg}>{item.lastMsg}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -78,6 +83,10 @@ export default class ChatList extends Component {
 }
 
 const styles = StyleSheet.create({
+  app: {
+    backgroundColor: '#272929',
+    flex: 1,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -92,9 +101,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderBottomWidth: 0,
   },
-  chat: {
-    width: '100%',
+  chatTitle: {
     marginLeft: 40,
+    color: '#FFF',
+  },
+  lastMsg: {
+    marginLeft: 40,
+    color: '#b6baba',
   },
   chatImg: {
     height: 50,

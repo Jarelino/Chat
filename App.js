@@ -20,10 +20,7 @@ export default function App() {
           component={ChatList}
           options={{headerLeft: null, title: 'Chats'}}
         />
-        <Stack.Screen
-          name="Chat"
-          component={Chat}
-        />
+        <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>

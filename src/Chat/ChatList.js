@@ -1,11 +1,87 @@
-import * as React from 'react';
-import {Button, View, Text} from 'react-native';
+import React, {Component} from 'react';
+import {
+  Button,
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 
-export default function ChatList({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button title="LogOut" onPress={() => navigation.navigate('SignIn')} />
-    </View>
-  );
+export default class ChatList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chats: [
+        {title: 'Roma', lastMsg: '132', id: '1'},
+        {title: 'Vlad', lastMsg: '649', id: '2'},
+        {title: 'WorkChat', lastMsg: '54896', id: '3'},
+      ],
+    };
+  }
+
+  chatHandler = title => () => {
+    this.props.navigation.navigate('Chat', {title});
+  };
+
+  render() {
+    return (
+      <View>
+        <View>
+          <FlatList
+            data={this.state.chats}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                style={styles.chatItem}
+                onPress={this.chatHandler(item.title)}>
+                <Image
+                  style={styles.chatImg}
+                  source={{
+                    uri:
+                      'https://static-s.aa-cdn.net/img/ios/547582577/5609f1bb627c74633acebd9724f65271?v=1',
+                  }}
+                />
+                <View>
+                  <Text style={styles.chat}>{item.title}</Text>
+                  <Text style={styles.chat}>{item.lastMsg}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.id}
+          />
+        </View>
+        <Button
+          title="LogOut"
+          onPress={() => this.props.navigation.navigate('SignIn')}
+        />
+      </View>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chatItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    fontSize: 15,
+    padding: 10,
+    borderWidth: 1,
+    borderBottomWidth: 0,
+  },
+  chat: {
+    width: '100%',
+    marginLeft: 40,
+  },
+  chatImg: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+  },
+});

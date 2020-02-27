@@ -47,7 +47,7 @@ export default class SignIn extends Component {
     //   this.props.navigation.navigate('ChatList');
     // }
 
-    this.props.navigation.navigate('ChatList');
+    this.props.navigation.navigate('ChatStack');
   };
 
   render() {

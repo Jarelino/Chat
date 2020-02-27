@@ -1,25 +1,19 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {Image} from 'react-native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import ChatList from './src/Chat/ChatList';
-import Chat from './src/Chat/Chat';
+import ChatStack from './src/Chat/ChatStack';
+import AuthStack from './src/Auth/AuthStack';
 
-import SignIn from './src/Auth/SignIn';
-import SignUp from './src/Auth/SignUp';
-
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="ChatList" component={ChatList} />
-        <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Auth" component={AuthStack} />
+        <Drawer.Screen name="ChatStack" component={ChatStack} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

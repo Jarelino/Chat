@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {
-  Button,
   View,
   TouchableOpacity,
   Text,
   StyleSheet,
   Image,
+  Alert,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -76,10 +76,11 @@ export default class ChatList extends Component {
             keyExtractor={item => item.id}
           />
         </View>
-        <Button
-          title="LogOut"
-          onPress={() => this.props.navigation.navigate('SignIn')}
-        />
+        <TouchableOpacity
+          style={styles.btnBlock}
+          onPress={() => this.props.navigation.navigate('Auth')}>
+          <Text style={styles.btnText}>LogOut</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
   app: {
     backgroundColor: '#272929',
     flex: 1,
+    justifyContent: 'space-between',
   },
   container: {
     flex: 1,
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 10,
     borderWidth: 1,
-    borderBottomWidth: 0,
+    borderTopWidth: 0,
   },
   chatTitle: {
     marginLeft: 40,
@@ -116,5 +118,17 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 25,
+  },
+  btnBlock: {
+    backgroundColor: 'blue',
+    paddingVertical: 7,
+    paddingHorizontal: 18,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  btnText: {
+    fontSize: 20,
+    color: '#fff',
+    textAlign: 'center',
   },
 });

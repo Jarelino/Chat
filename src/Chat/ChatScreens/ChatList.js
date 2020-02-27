@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   Alert,
+  Button,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -17,7 +18,9 @@ export default class ChatList extends Component {
       headerStyle: {
         backgroundColor: '#233342FF',
       },
-      headerLeft: null,
+      headerLeft: () => (
+        <Button onPress={() => props.navigation.openDrawer()} title="=" />
+      ),
     });
 
     this.state = {

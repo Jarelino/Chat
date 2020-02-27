@@ -16,7 +16,7 @@ export default class SignUp extends Component {
         backgroundColor: '#233342FF',
       },
       headerTintColor: '#FFF',
-      title: 'Chats',
+      title: 'SignUp',
     });
     this.state = {
       code: '',

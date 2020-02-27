@@ -19,7 +19,7 @@ export default class SignIn extends Component {
       },
       headerTintColor: '#FFF',
       headerLeft: null,
-      title: 'Chats',
+      title: 'SignIn',
     });
     this.state = {
       phone: '',

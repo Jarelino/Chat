@@ -19,7 +19,11 @@ export default class ChatList extends Component {
         backgroundColor: '#233342FF',
       },
       headerLeft: () => (
-        <Button onPress={() => props.navigation.openDrawer()} title="=" />
+        <Button
+          title="Menu"
+          color="#233342FF"
+          onPress={() => this.props.navigation.openDrawer()}
+        />
       ),
     });
 
@@ -79,11 +83,6 @@ export default class ChatList extends Component {
             keyExtractor={item => item.id}
           />
         </View>
-        <TouchableOpacity
-          style={styles.btnBlock}
-          onPress={() => this.props.navigation.navigate('Auth')}>
-          <Text style={styles.btnText}>LogOut</Text>
-        </TouchableOpacity>
       </View>
     );
   }

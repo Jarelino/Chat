@@ -1,7 +1,8 @@
-import {CHANGE_USERNAME_ACTION} from './actions';
+import {CHANGE_USERNAME_ACTION, CHANGE_PHONE_ACTION} from './actions';
 
 const defaultState = {
   username: '',
+  phone: '',
 };
 
 export const ProfileReducer = (state = defaultState, action) => {
@@ -10,6 +11,11 @@ export const ProfileReducer = (state = defaultState, action) => {
       return {
         ...state,
         username: action.username,
+      };
+    case CHANGE_PHONE_ACTION:
+      return {
+        ...state,
+        username: action.phone,
       };
     default:
       return state;

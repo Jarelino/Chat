@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {changeUsername, changePhone} from '../../Redux/Profile/actions';
+import {ChangeUsername, ChangePhone} from '../../Redux/Profile/actions';
 
 import SignIn from './SignIn';
 
@@ -15,9 +15,9 @@ class SignInContainer extends Component {
         appBg={this.props.appBg}
         headerBg={this.props.headerBg}
         textColor={this.props.textColor}
-        changeUsername={this.props.changeUsername}
+        ChangeUsername={this.props.ChangeUsername}
         username={this.props.username}
-        changePhone={this.props.changePhone}
+        ChangePhone={this.props.ChangePhone}
         phone={this.props.phone}
         navigation={this.props.navigation}
         route={this.props.route}
@@ -37,8 +37,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  changeUsername,
-  changePhone,
+  ChangeUsername,
+  ChangePhone,
 };
 
 export default connect(

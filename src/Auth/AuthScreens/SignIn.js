@@ -17,14 +17,14 @@ export default class SignIn extends Component {
       headerStyle: {
         backgroundColor: this.props.headerBg,
       },
-      headerTintColor: '#FFF',
+      headerTintColor: this.props.textColor,
       headerLeft: null,
       title: 'SignIn',
     });
   }
 
-  changeNameHandler = name => this.props.changeUsername(name);
-  changePhoneHandler = phone => this.props.changePhone(phone);
+  changeNameHandler = name => this.props.ChangeUsername(name);
+  changePhoneHandler = phone => this.props.ChangePhone(phone);
 
   signUpHandler = () => {
     this.props.navigation.navigate('SignUp');

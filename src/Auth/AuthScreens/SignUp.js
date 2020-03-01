@@ -28,8 +28,8 @@ export default class SignUp extends Component {
     this.setState({[key]: val});
   };
 
-  changeNameHandler = name => this.props.changeUsername(name);
-  changePhoneHandler = phone => this.props.changePhone(phone);
+  changeNameHandler = name => this.props.ChangeUsername(name);
+  changePhoneHandler = phone => this.props.ChangePhone(phone);
 
   submitHandler = async () => {
     // if (!this.confirmResult) {

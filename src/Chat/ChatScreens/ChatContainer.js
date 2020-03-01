@@ -1,26 +1,26 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ChangeUsername, ChangePhone} from '../../Redux/Profile/actions';
+import {AddOpponentMsg, AddMyMsg} from '../../Redux/Chats/actions';
 
-import SignUp from './SignUp';
+import Chat from './Chat';
 
-class SignUpContainer extends Component {
+class ChatContainer extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <SignUp
+      <Chat
         appBg={this.props.appBg}
         headerBg={this.props.headerBg}
         textColor={this.props.textColor}
-        ChangeUsername={this.props.ChangeUsername}
-        username={this.props.username}
-        ChangePhone={this.props.ChangePhone}
-        phone={this.props.phone}
+        username={this.props.currentOpponent}
         navigation={this.props.navigation}
         route={this.props.route}
+        opponentInfo={this.props.opponentInfo}
+        AddMyMsg={this.props.AddMyMsg}
+        AddOpponentMsg={this.props.AddOpponentMsg}
       />
     );
   }
@@ -31,17 +31,20 @@ const mapStateToProps = state => {
     appBg: state.AppSettingsReducer.appBg,
     headerBg: state.AppSettingsReducer.headerBg,
     textColor: state.AppSettingsReducer.textColor,
-    username: state.ProfileReducer.username,
-    phone: state.ProfileReducer.phone,
+    currentOpponent: state.ChatsReducer.currentOpponent,
+    opponentInfo:
+      state.ChatsReducer.users[
+        state.ChatsReducer.usersId[`${state.ChatsReducer.currentOpponent}`]
+      ],
   };
 };
 
 const mapDispatchToProps = {
-  ChangeUsername,
-  ChangePhone,
+  AddMyMsg,
+  AddOpponentMsg,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignUpContainer);
+)(ChatContainer);

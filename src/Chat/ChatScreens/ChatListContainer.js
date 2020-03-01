@@ -1,24 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ChangeUsername, ChangePhone} from '../../Redux/Profile/actions';
+import {ChangeCurrentOpponent} from '../../Redux/Chats/actions';
 
-import SignUp from './SignUp';
+import ChatList from './ChatList';
 
-class SignUpContainer extends Component {
+class ChatListContainer extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <SignUp
+      <ChatList
         appBg={this.props.appBg}
         headerBg={this.props.headerBg}
         textColor={this.props.textColor}
-        ChangeUsername={this.props.ChangeUsername}
-        username={this.props.username}
-        ChangePhone={this.props.ChangePhone}
-        phone={this.props.phone}
+        ChangeCurrentOpponent={this.props.ChangeCurrentOpponent}
+        users={this.props.users}
         navigation={this.props.navigation}
         route={this.props.route}
       />
@@ -31,17 +29,15 @@ const mapStateToProps = state => {
     appBg: state.AppSettingsReducer.appBg,
     headerBg: state.AppSettingsReducer.headerBg,
     textColor: state.AppSettingsReducer.textColor,
-    username: state.ProfileReducer.username,
-    phone: state.ProfileReducer.phone,
+    users: state.ChatsReducer.users,
   };
 };
 
 const mapDispatchToProps = {
-  ChangeUsername,
-  ChangePhone,
+  ChangeCurrentOpponent,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignUpContainer);
+)(ChatListContainer);

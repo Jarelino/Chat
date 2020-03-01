@@ -9,34 +9,33 @@ export default class ChatHeader extends Component {
 
   render() {
     return (
-      <View style={styles.headerContainer}>
+      <View style={this.styles.headerContainer}>
         <Image
-          style={styles.chatImg}
+          style={this.styles.chatImg}
           source={{
-            uri: this.props.route.params.image,
+            uri: this.props.image,
           }}
         />
-        <Text style={styles.headerTitle}>{this.props.route.params.title}</Text>
+        <Text style={this.styles.headerTitle}>{this.props.title}</Text>
       </View>
     );
   }
+  styles = StyleSheet.create({
+    headerContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    headerTitle: {
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: this.props.textColor,
+    },
+    chatImg: {
+      height: 50,
+      width: 50,
+      borderRadius: 25,
+      marginHorizontal: 10,
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#FFF',
-  },
-  chatImg: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    marginHorizontal: 10,
-  },
-});

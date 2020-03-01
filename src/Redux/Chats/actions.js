@@ -3,10 +3,10 @@ export const ADD_OPPONENT_MESSAGE_ACTION = 'ADD_OPPONENT_MESSAGE_ACTION';
 
 export const AddMyMsg = msg => ({
   type: ADD_MY_MESSAGE_ACTION,
-  msg,
+  payload: msg,
 });
 
 export const AddOpponentMsg = msg => ({
   type: ADD_MY_MESSAGE_ACTION,
-  msg,
+  payload: msg,
 });

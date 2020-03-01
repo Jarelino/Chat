@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {changeUsername, changePhone} from '../../Redux/Profile/actions';
 
-import SignIn from './SignIn';
+import SignUp from './SignUp';
 
-class SignInContainer extends Component {
+class SignUpContainer extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <SignIn
+      <SignUp
         appBg={this.props.appBg}
         headerBg={this.props.headerBg}
         textColor={this.props.textColor}
@@ -44,4 +44,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignInContainer);
+)(SignUpContainer);

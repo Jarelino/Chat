@@ -9,14 +9,14 @@ export const ChatsReducer = (state = defaultState, action) => {
     case ADD_MY_MESSAGE_ACTION:
       return {
         ...state,
-        messages: [...state.messages, {message: action.msg, author: 'me'}],
+        messages: [...state.messages, {message: action.payload, author: 'me'}],
       };
     case ADD_OPPONENT_MESSAGE_ACTION:
       return {
         ...state,
         messages: [
           ...state.messages,
-          {message: action.msg, author: 'opponent'},
+          {message: action.payload, author: 'opponent'},
         ],
       };
     default:

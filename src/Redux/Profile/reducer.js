@@ -6,16 +6,17 @@ const defaultState = {
 };
 
 export const ProfileReducer = (state = defaultState, action) => {
+  console.log(state, action);
   switch (action.type) {
     case CHANGE_USERNAME_ACTION:
       return {
         ...state,
-        username: action.username,
+        username: action.payload,
       };
     case CHANGE_PHONE_ACTION:
       return {
         ...state,
-        username: action.phone,
+        phone: action.payload,
       };
     default:
       return state;

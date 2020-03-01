@@ -4,15 +4,15 @@ export const CHANGE_TEXT_COLOR = 'CHANGE_TEXT_COLOR';
 
 export const setAppBg = color => ({
   type: CHANGE_APP_BG,
-  color,
+  payload: color,
 });
 
 export const setHeaderBg = color => ({
   type: CHANGE_APP_BG,
-  color,
+  payload: color,
 });
 
 export const setTextColor = color => ({
   type: CHANGE_APP_BG,
-  color,
+  payload: color,
 });

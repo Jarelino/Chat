@@ -9,11 +9,11 @@ const defaultState = {
 export const AppSettingsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case CHANGE_APP_BG:
-      return {...state, appBg: action.color};
+      return {...state, appBg: action.payload};
     case CHANGE_HEADER_BG:
-      return {...state, headerBg: action.color};
+      return {...state, headerBg: action.payload};
     case CHANGE_TEXT_COLOR:
-      return {...state, textColor: action.color};
+      return {...state, textColor: action.payload};
     default:
       return state;
   }

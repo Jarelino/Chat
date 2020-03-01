@@ -42,6 +42,11 @@ export default function DrawerComponent(props) {
             style={styles.menuBlock}>
             <Text style={styles.userText}>Settings</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={menuHandler('ChatStack')}
+            style={styles.menuBlock}>
+            <Text style={styles.userText}>Chats</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity

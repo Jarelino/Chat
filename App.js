@@ -9,23 +9,29 @@ import Profile from './src/Drawer/DrawerScreens/Profile';
 import Settings from './src/Drawer/DrawerScreens/Settings';
 
 import DrawerComponent from './src/Drawer/DrawerComponent';
-
 const Drawer = createDrawerNavigator();
+
+import rootReducer from './src/Redux/Main';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+const store = createStore(rootReducer);
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => DrawerComponent(props)}>
-        <Drawer.Screen
-          options={{gestureEnabled: false}}
-          name="Auth"
-          component={AuthStack}
-        />
-        <Drawer.Screen name="ChatStack" component={ChatStack} />
-        <Drawer.Screen name="AddChat" component={AddChat} />
-        <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="Settings" component={Settings} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Drawer.Navigator drawerContent={props => DrawerComponent(props)}>
+          <Drawer.Screen
+            options={{gestureEnabled: false}}
+            name="Auth"
+            component={AuthStack}
+          />
+          <Drawer.Screen name="ChatStack" component={ChatStack} />
+          <Drawer.Screen name="AddChat" component={AddChat} />
+          <Drawer.Screen name="Profile" component={Profile} />
+          <Drawer.Screen name="Settings" component={Settings} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

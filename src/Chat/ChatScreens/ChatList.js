@@ -40,7 +40,7 @@ export default class ChatList extends Component {
       <View style={this.styles.app}>
         <View>
           <FlatList
-            data={this.props.users}
+            data={this.state.users}
             keyExtractor={item => item.id}
             renderItem={({item}) => (
               <TouchableOpacity

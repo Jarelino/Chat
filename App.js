@@ -8,7 +8,7 @@ import AddChat from './src/Drawer/DrawerScreens/AddChat';
 import Profile from './src/Drawer/DrawerScreens/Profile';
 import Settings from './src/Drawer/DrawerScreens/Settings';
 
-import DrawerComponent from './src/Drawer/DrawerComponent';
+import DrawerComponent from './src/Drawer/DrawerContainer';
 const Drawer = createDrawerNavigator();
 
 import rootReducer from './src/Redux/Main';
@@ -20,7 +20,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Drawer.Navigator drawerContent={props => DrawerComponent(props)}>
+        <Drawer.Navigator
+          drawerContent={props => <DrawerComponent props={props} />}>
           <Drawer.Screen
             options={{gestureEnabled: false}}
             name="Auth"

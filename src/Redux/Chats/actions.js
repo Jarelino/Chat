@@ -4,7 +4,7 @@ export const ADD_USER_ACTION = 'ADD_USER_ACTION';
 export const CHANGE_CURRENT_OPPONENT_ACTION = 'CHANGE_CURRENT_OPPONENT_ACTION';
 
 export const AddUser = username => ({
-  type: ADD_MY_MESSAGE_ACTION,
+  type: ADD_USER_ACTION,
   payload: username,
 });
 
@@ -19,6 +19,6 @@ export const AddMyMsg = msg => ({
 });
 
 export const AddOpponentMsg = msg => ({
-  type: ADD_MY_MESSAGE_ACTION,
+  type: ADD_OPPONENT_MESSAGE_ACTION,
   payload: msg,
 });

@@ -49,22 +49,24 @@ const defaultState = {
 export const ChatsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_USER_ACTION:
+      state.users = [
+        ...state.users,
+        {
+          username: action.payload,
+          image:
+            'https://pbs.twimg.com/profile_images/1215443846307278848/0PxQ3Gck_400x400.png',
+          messages: [{}],
+          id: `${state.users.length + 1}`,
+        },
+      ];
+
+      state.usersId = {
+        ...state.usersId,
+        [`${action.payload}`]: state.users.length - 1,
+      };
+
       return {
         ...state,
-        users: [
-          ...state.users,
-          {
-            username: action.payload,
-            image:
-              'https://pbs.twimg.com/profile_images/1215443846307278848/0PxQ3Gck_400x400.png',
-            messages: [{}],
-            id: `${state.users.length}`,
-          },
-        ],
-        usersId: {
-          ...state.usersId,
-          [`${action.payload}`]: state.users.length - 1,
-        },
       };
     case CHANGE_CURRENT_OPPONENT_ACTION:
       return {

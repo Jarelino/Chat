@@ -24,7 +24,6 @@ export default class ChatList extends Component {
         </TouchableOpacity>
       ),
     });
-
     this.state = {
       users: this.props.users,
     };

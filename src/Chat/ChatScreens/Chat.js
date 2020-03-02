@@ -51,7 +51,7 @@ export default class Chat extends Component {
       <View style={this.styles.container}>
         <View>
           <FlatList
-            data={this.state.messages}
+            data={this.state.messages ? this.state.messages : null}
             renderItem={({item}) => (
               <View
                 style={

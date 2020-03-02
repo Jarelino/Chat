@@ -1,13 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Image,
-  Alert,
-  Button,
-} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 export default class ChatList extends Component {
@@ -20,7 +12,7 @@ export default class ChatList extends Component {
       },
       headerLeft: () => (
         <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
-          <Text style={this.styles.menuBtn}>Menu</Text>
+          <Text style={this.menuBtn(this.props.textColor)}>Menu</Text>
         </TouchableOpacity>
       ),
     });
@@ -31,11 +23,37 @@ export default class ChatList extends Component {
     };
   }
 
+  appContainer = color => ({
+    backgroundColor: color,
+    flex: 1,
+    justifyContent: 'space-between',
+  });
+
+  menuBtn = color => ({
+    color,
+    margin: 10,
+  });
+
+  chatInfo = color => ({
+    marginLeft: 40,
+    color,
+  });
+
   componentDidMount = () => {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.state.users = this.props.users;
       this.setState({
         refresh: !this.state.refresh,
+      });
+
+      this.appContainer(this.state.appBg);
+      this.menuBtn(this.props.textColor);
+      this.chatInfo(this.props.textColor);
+      this.props.navigation.setOptions({
+        headerStyle: {
+          backgroundColor: this.props.headerBg,
+        },
+        headerTintColor: this.props.textColor,
       });
     });
   };
@@ -51,7 +69,7 @@ export default class ChatList extends Component {
 
   render() {
     return (
-      <View style={this.styles.app}>
+      <View style={this.appContainer(this.props.appBg)}>
         <View>
           <FlatList
             data={this.state.users}
@@ -68,8 +86,10 @@ export default class ChatList extends Component {
                   }}
                 />
                 <View>
-                  <Text style={this.styles.chatTitle}>{item.username}</Text>
-                  <Text style={this.styles.lastMsg}>
+                  <Text style={this.chatInfo(this.props.textColor)}>
+                    {item.username}
+                  </Text>
+                  <Text style={this.chatInfo(this.props.textColor)}>
                     {item.messages[item.messages.length - 1].msg}
                   </Text>
                 </View>
@@ -81,19 +101,10 @@ export default class ChatList extends Component {
     );
   }
   styles = StyleSheet.create({
-    app: {
-      backgroundColor: this.props.appBg,
-      flex: 1,
-      justifyContent: 'space-between',
-    },
     container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    menuBtn: {
-      color: this.props.textColor,
-      margin: 10,
     },
     chatItem: {
       flex: 1,
@@ -104,10 +115,6 @@ export default class ChatList extends Component {
       borderWidth: 1,
       borderTopWidth: 0,
     },
-    chatTitle: {
-      marginLeft: 40,
-      color: '#FFF',
-    },
     lastMsg: {
       marginLeft: 40,
       color: '#b6baba',
@@ -116,18 +123,6 @@ export default class ChatList extends Component {
       height: 50,
       width: 50,
       borderRadius: 25,
-    },
-    btnBlock: {
-      backgroundColor: 'blue',
-      paddingVertical: 7,
-      paddingHorizontal: 18,
-      borderRadius: 10,
-      marginTop: 10,
-    },
-    btnText: {
-      fontSize: 20,
-      color: '#fff',
-      textAlign: 'center',
     },
   });
 }

@@ -2,7 +2,7 @@ import {CHANGE_APP_BG, CHANGE_HEADER_BG, CHANGE_TEXT_COLOR} from './actions';
 
 const defaultState = {
   appBg: '#272929',
-  headerBg: '#233342FF',
+  headerBg: '#515555',
   textColor: '#fff',
 };
 

@@ -19,6 +19,25 @@ export class AddChatScreen extends Component {
     });
   }
 
+  appContainer = color => ({
+    backgroundColor: color,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  });
+
+  componentDidMount = () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.props.navigation.setOptions({
+        headerTitle: () => <Text style={this.styles.header}>Add Chat</Text>,
+        headerStyle: {
+          backgroundColor: this.props.headerBg,
+        },
+      });
+    });
+  };
+
   submitUserHandler = () => {
     this.props.AddUser(this.state.inputUser);
     this.props.navigation.navigate('ChatList');
@@ -26,7 +45,7 @@ export class AddChatScreen extends Component {
 
   render() {
     return (
-      <View style={this.styles.container}>
+      <View style={this.appContainer(this.props.appBg)}>
         <TextInput
           placeholder="Enter username"
           placeholderTextColor={this.props.textColor}
@@ -42,13 +61,6 @@ export class AddChatScreen extends Component {
   }
 
   styles = StyleSheet.create({
-    container: {
-      backgroundColor: this.props.appBg,
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-    },
     header: {
       color: this.props.textColor,
       fontSize: 20,

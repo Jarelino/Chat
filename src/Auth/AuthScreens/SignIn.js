@@ -26,6 +26,36 @@ export default class SignIn extends Component {
   changeNameHandler = name => this.props.ChangeUsername(name);
   changePhoneHandler = phone => this.props.ChangePhone(phone);
 
+  componentDidMount = () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.props.navigation.setOptions({
+        headerStyle: {
+          backgroundColor: this.props.headerBg,
+        },
+        headerTintColor: this.props.textColor,
+        headerLeft: null,
+        title: 'SignIn',
+      });
+    });
+  };
+
+  appContainer = color => ({
+    flex: 1,
+    backgroundColor: color,
+    alignItems: 'center',
+    justifyContent: 'center',
+  });
+
+  input = color => ({
+    padding: 10,
+    color,
+    width: '85%',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#FFF',
+    marginBottom: 10,
+  });
+
   signUpHandler = () => {
     this.props.navigation.navigate('SignUp');
   };
@@ -45,18 +75,18 @@ export default class SignIn extends Component {
 
   render() {
     return (
-      <View style={this.styles.container}>
+      <View style={this.appContainer(this.props.appBg)}>
         <TextInput
           placeholder="Enter your phone number"
           keyboardType="number-pad"
-          style={this.styles.input}
+          style={this.input(this.props.textColor)}
           value={this.props.phone}
           onChangeText={this.changePhoneHandler}
           placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter your name'}
-          style={this.styles.input}
+          style={this.input(this.props.textColor)}
           value={this.props.username}
           onChangeText={this.changeNameHandler}
           placeholderTextColor="#b6baba"

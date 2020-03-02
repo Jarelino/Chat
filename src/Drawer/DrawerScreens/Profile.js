@@ -17,9 +17,26 @@ export class ProfileScreen extends Component {
     });
   }
 
+  appContainer = color => ({
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: color,
+  });
+
+  componentDidMount = () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.props.navigation.setOptions({
+        headerTitle: () => <Text style={this.styles.header}>Profile</Text>,
+        headerStyle: {
+          backgroundColor: this.props.headerBg,
+        },
+      });
+    });
+  };
+
   render() {
     return (
-      <View style={this.styles.container}>
+      <View style={this.appContainer(this.props.appBg)}>
         <Image
           style={this.styles.userImg}
           source={{
@@ -31,18 +48,13 @@ export class ProfileScreen extends Component {
           <Text style={this.styles.username}>{this.props.username}</Text>
         </View>
         <View>
-        <Text style={this.styles.phone}>{this.props.phone}</Text>
+          <Text style={this.styles.phone}>{this.props.phone}</Text>
         </View>
       </View>
     );
   }
 
   styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      backgroundColor: this.props.appBg,
-    },
     header: {
       color: this.props.textColor,
       fontSize: 20,

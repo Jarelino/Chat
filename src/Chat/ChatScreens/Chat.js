@@ -39,6 +39,24 @@ export default class Chat extends Component {
     });
   }
 
+  myMsg = (textColor, bgColor) => ({
+    color: textColor,
+    backgroundColor: bgColor,
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 5,
+    textAlign: 'right',
+  });
+
+  oppMsg = color => ({
+    color,
+    backgroundColor: '#a8a8a8',
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 5,
+    textAlign: 'left',
+  });
+
   sendMsg = () => {
     if (this.state.msg !== '') {
       this.props.AddMyMsg(this.state.msg);
@@ -46,32 +64,67 @@ export default class Chat extends Component {
     }
   };
 
+  componentDidMount = () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.props.navigation.setOptions({
+        headerTitle: () => (
+          <ChatHeader
+            navigation={this.props.navigation}
+            route={this.props.route}
+            title={this.props.opponentInfo.username}
+            image={this.props.opponentInfo.image}
+            headerBg={this.props.headerBg}
+            textColor={this.props.textColor}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: this.props.headerBg,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <Text style={this.styles.backBtn}>Back</Text>
+          </TouchableOpacity>
+        ),
+        headerTintColor: this.props.textColor,
+      });
+    });
+  };
+
+  componentWillUnmount = () => {
+    this._unsubscribe();
+  };
+
   render() {
     return (
       <View style={this.styles.container}>
-        <View>
-          <FlatList
-            data={this.state.messages ? this.state.messages : null}
-            renderItem={({item}) => (
-              <View
-                style={
-                  item.author === 'Me'
-                    ? this.styles.myMsgContainer
-                    : this.styles.oppMsgContainer
-                }>
-                <Text
+        {this.state.messages[0].hasOwnProperty() ? (
+          <View>
+            <FlatList
+              data={this.state.messages}
+              renderItem={({item}) => (
+                <View
                   style={
                     item.author === 'Me'
-                      ? this.styles.myMsg
-                      : this.styles.oppMsg
+                      ? this.styles.myMsgContainer
+                      : this.styles.oppMsgContainer
                   }>
-                  {item.msg}
-                </Text>
-              </View>
-            )}
-            keyExtractor={item => item.id}
-          />
-        </View>
+                  <Text
+                    style={
+                      item.author === 'Me'
+                        ? this.myMsg(this.props.textColor, this.props.headerBg)
+                        : this.oppMsg(this.props.textColor)
+                    }>
+                    {item.msg}
+                  </Text>
+                </View>
+              )}
+              keyExtractor={item => item.id}
+            />
+          </View>
+        ) : (
+          <View />
+        )}
+
         <View style={this.styles.inputContainer}>
           <TextInput
             placeholder="Message"
@@ -104,7 +157,7 @@ export default class Chat extends Component {
       borderBottomWidth: 0,
       padding: 5,
       flex: 1,
-      backgroundColor: '#233342F0',
+      backgroundColor: this.props.headerBg,
       color: '#FFF',
     },
     sendBtn: {
@@ -114,15 +167,6 @@ export default class Chat extends Component {
       marginBottom: 5,
       alignItems: 'flex-end',
     },
-    myMsg: {
-      color: '#FFF',
-      backgroundColor: '#3685FA',
-      padding: 10,
-      borderRadius: 10,
-      marginVertical: 5,
-      textAlign: 'right',
-    },
-
     oppMsgContainer: {
       marginBottom: 5,
       alignItems: 'flex-start',

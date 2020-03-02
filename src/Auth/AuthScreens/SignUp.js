@@ -24,6 +24,35 @@ export default class SignUp extends Component {
     };
   }
 
+  componentDidMount = () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.props.navigation.setOptions({
+        headerStyle: {
+          backgroundColor: this.props.headerBg,
+        },
+        headerTintColor: this.props.textColor,
+        title: 'SignUp',
+      });
+    });
+  };
+
+  appContainer = color => ({
+    flex: 1,
+    backgroundColor: color,
+    alignItems: 'center',
+    justifyContent: 'center',
+  });
+
+  input = color => ({
+    padding: 10,
+    color,
+    width: '85%',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#FFF',
+    marginBottom: 10,
+  });
+
   handlerChange = key => val => {
     this.setState({[key]: val});
   };
@@ -50,25 +79,25 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <View style={this.styles.container}>
+      <View style={this.appContainer(this.props.appBg)}>
         <TextInput
           placeholder="Enter your phone number"
           keyboardType="number-pad"
-          style={this.styles.input}
+          style={this.input(this.props.textColor)}
           value={this.props.phone}
           onChangeText={this.changePhoneHandler}
           placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter your name'}
-          style={this.styles.input}
+          style={this.input(this.props.textColor)}
           value={this.props.username}
           onChangeText={this.changeNameHandler}
           placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter code from sms'}
-          style={this.styles.input}
+          style={this.input(this.props.textColor)}
           value={this.state.code}
           onChangeText={this.handlerChange('code')}
           placeholderTextColor="#b6baba"
@@ -83,21 +112,6 @@ export default class SignUp extends Component {
   }
 
   styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: this.props.appBg,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    input: {
-      padding: 10,
-      color: this.props.textColor,
-      width: '85%',
-      borderWidth: 1,
-      borderRadius: 5,
-      borderColor: '#FFF',
-      marginBottom: 10,
-    },
     btnText: {
       fontSize: 20,
       color: '#fff',

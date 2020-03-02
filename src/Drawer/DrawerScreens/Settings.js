@@ -2,22 +2,28 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import SettingsContainer from './SettingsContainer';
 
-class SettingsScreen extends Component {
+export class SettingsScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    console.log(this.props.appBg);
+    this.state = {
+      headerBg: this.props.headerBg,
+      textColor: this.props.textColor,
+      appBg: this.props.appBg,
+    };
     this.props.navigation.setOptions({
-      headerTitle: () => <Text style={{color: '#FFF'}}>Settings</Text>,
+      headerTitle: () => <Text style={this.state.textColor}>Settings</Text>,
       headerStyle: {
-        backgroundColor: '#233342FF',
+        backgroundColor: this.state.headerBg,
       },
     });
   }
 
-  changeAppBgHandler = color => () => alert(color);
-  changeHeaderBgHandler = color => () => alert(color);
-  changeTextColorHandler = color => () => alert(color);
+  changeAppBgHandler = color => () => this.props.setAppBg(color);
+  changeHeaderBgHandler = color => () => this.props.setHeaderBg(color);
+  changeTextColorHandler = color => () => this.props.setTextColor(color);
 
   render() {
     return (
@@ -78,7 +84,7 @@ class SettingsScreen extends Component {
   styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#272929',
+      backgroundColor: this.props.appBg,
     },
     colorContainer: {
       flexDirection: 'row',
@@ -105,7 +111,7 @@ const Stack = createStackNavigator();
 export default function Settings() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+      <Stack.Screen name="SettingsScreen" component={SettingsContainer} />
     </Stack.Navigator>
   );
 }

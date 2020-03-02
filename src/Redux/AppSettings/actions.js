@@ -8,11 +8,11 @@ export const setAppBg = color => ({
 });
 
 export const setHeaderBg = color => ({
-  type: CHANGE_APP_BG,
+  type: CHANGE_HEADER_BG,
   payload: color,
 });
 
 export const setTextColor = color => ({
-  type: CHANGE_APP_BG,
+  type: CHANGE_TEXT_COLOR,
   payload: color,
 });

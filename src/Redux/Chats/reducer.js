@@ -83,6 +83,7 @@ export const ChatsReducer = (state = defaultState, action) => {
             .length + 1}`,
         },
       ];
+
       return {
         ...state,
       };

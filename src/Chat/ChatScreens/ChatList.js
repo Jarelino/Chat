@@ -24,10 +24,25 @@ export default class ChatList extends Component {
         </TouchableOpacity>
       ),
     });
+
     this.state = {
       users: this.props.users,
+      refresh: true,
     };
   }
+
+  componentDidMount = () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.state.users = this.props.users;
+      this.setState({
+        refresh: !this.state.refresh,
+      });
+    });
+  };
+
+  componentWillUnmount = () => {
+    this._unsubscribe();
+  };
 
   chatHandler = title => () => {
     this.props.ChangeCurrentOpponent(title);
@@ -40,6 +55,7 @@ export default class ChatList extends Component {
         <View>
           <FlatList
             data={this.state.users}
+            extraData={this.state.refresh}
             keyExtractor={item => item.id}
             renderItem={({item}) => (
               <TouchableOpacity

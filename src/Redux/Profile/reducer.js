@@ -1,8 +1,8 @@
 import {CHANGE_USERNAME_ACTION, CHANGE_PHONE_ACTION} from './actions';
 
 const defaultState = {
-  username: '',
-  phone: '',
+  username: 'Roman',
+  phone: '+375295559684',
 };
 
 export const ProfileReducer = (state = defaultState, action) => {

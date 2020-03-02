@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
-class ProfileScreen extends Component {
+import ProfileContainer from './ProfileContainer';
+
+export class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -11,7 +12,7 @@ class ProfileScreen extends Component {
     this.props.navigation.setOptions({
       headerTitle: () => <Text style={this.styles.header}>Profile</Text>,
       headerStyle: {
-        backgroundColor: '#233342FF',
+        backgroundColor: this.props.headerBg,
       },
     });
   }
@@ -27,10 +28,10 @@ class ProfileScreen extends Component {
           }}
         />
         <View style={this.styles.infoContainer}>
-          <Text style={this.styles.username}>Username</Text>
+          <Text style={this.styles.username}>{this.props.username}</Text>
         </View>
         <View>
-          <Text style={this.styles.phone}>+375295559684</Text>
+        <Text style={this.styles.phone}>{this.props.phone}</Text>
         </View>
       </View>
     );
@@ -40,10 +41,10 @@ class ProfileScreen extends Component {
     container: {
       flex: 1,
       alignItems: 'center',
-      backgroundColor: '#272929',
+      backgroundColor: this.props.appBg,
     },
     header: {
-      color: '#FFF',
+      color: this.props.textColor,
       fontSize: 20,
     },
     userImg: {
@@ -54,12 +55,12 @@ class ProfileScreen extends Component {
     },
     username: {
       margin: 15,
-      color: '#FFF',
+      color: this.props.textColor,
       fontSize: 30,
       fontWeight: 'bold',
     },
     phone: {
-      color: '#FFF',
+      color: this.props.textColor,
       fontSize: 20,
     },
   });
@@ -70,7 +71,7 @@ const Stack = createStackNavigator();
 export default function Profile() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Stack.Screen name="ProfileScreen" component={ProfileContainer} />
     </Stack.Navigator>
   );
 }

@@ -17,9 +17,9 @@ export class SettingsScreen extends Component {
     });
   }
 
-  changeAppBgHandler = color => () => this.props.setAppBg(color);
+  changeAppBg = color => this.props.setAppBg(color);
 
-  changeHeaderBgHandler = color => () => {
+  changeHeaderBg = color => {
     this.props.setHeaderBg(color);
     this.props.navigation.setOptions({
       headerTitle: () => (
@@ -31,7 +31,7 @@ export class SettingsScreen extends Component {
     });
   };
 
-  changeTextColorHandler = color => () => {
+  changeTextColor = color => {
     this.props.setTextColor(color);
     this.props.navigation.setOptions({
       headerTitle: () => (
@@ -60,59 +60,48 @@ export class SettingsScreen extends Component {
     backgroundColor: color,
   });
 
+  changeThemeHandler = theme => () => {
+    switch (theme) {
+      case 'Dark':
+        this.changeAppBg('#272929');
+        this.changeHeaderBg('#515555');
+        this.changeTextColor('#FFF')
+        break;
+      case 'Light':
+        this.changeAppBg('#0088cc');
+        this.changeHeaderBg('#fff');
+        this.changeTextColor('#000');
+        break;
+      case 'Purple':
+        this.changeAppBg('#a36ce7');
+        this.changeHeaderBg('#8236de');
+        this.changeTextColor('#FFF');
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <View style={this.appContainer(this.props.appBg)}>
         <Text style={this.blockTitle(this.props.textColor)}>
-          App background
+          App Theme
         </Text>
         <View style={this.styles.colorContainer}>
-          <TouchableOpacity onPress={this.changeAppBgHandler('#272929')}>
+          <TouchableOpacity onPress={this.changeThemeHandler('Dark')}>
             <View backgroundColor="#272929" style={this.styles.colorBlock}>
-              <Text style={{color: '#fff'}}> Dark Threme </Text>
+              <Text style={{color: '#fff'}}> Dark Theme </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.changeAppBgHandler('#0088cc')}>
+          <TouchableOpacity onPress={this.changeThemeHandler('Light')}>
             <View backgroundColor="#0088cc" style={this.styles.colorBlock}>
-              <Text style={{color: '#fff'}}> Light Threme </Text>
+              <Text style={{color: '#fff'}}> Light Theme </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.changeAppBgHandler('#a36ce7')}>
+          <TouchableOpacity onPress={this.changeThemeHandler('Purple')}>
             <View backgroundColor="#a36ce7" style={this.styles.colorBlock}>
-              <Text style={{color: '#fff'}}> Purple Threme </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <Text style={this.blockTitle(this.props.textColor)}>
-          Header background
-        </Text>
-        <View style={this.styles.colorContainer}>
-          <TouchableOpacity onPress={this.changeHeaderBgHandler('#515555')}>
-            <View backgroundColor="#515555" style={this.styles.colorBlock}>
-              <Text style={{color: '#fff'}}> Dark Threme </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.changeHeaderBgHandler('#fff')}>
-            <View backgroundColor="#fff" style={this.styles.colorBlock}>
-              <Text style={{color: '#000'}}> Light Threme </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.changeHeaderBgHandler('#8236de')}>
-            <View backgroundColor="#8236de" style={this.styles.colorBlock}>
-              <Text style={{color: '#fff'}}> Purple Threme </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <Text style={this.blockTitle(this.props.textColor)}>Text color</Text>
-        <View style={this.styles.colorContainer}>
-          <TouchableOpacity onPress={this.changeTextColorHandler('#FFF')}>
-            <View backgroundColor="#FFF" style={this.styles.colorBlock}>
-              <Text style={{color: '#000'}}> White </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.changeTextColorHandler('#000')}>
-            <View backgroundColor="#000" style={this.styles.colorBlock}>
-              <Text style={{color: '#fff'}}> Black </Text>
+              <Text style={{color: '#fff'}}> Purple Theme </Text>
             </View>
           </TouchableOpacity>
         </View>

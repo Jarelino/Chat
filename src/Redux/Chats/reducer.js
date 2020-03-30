@@ -20,7 +20,7 @@ const defaultState = {
     {
       username: 'Roman',
       image:
-        'https://static-s.aa-cdn.net/img/ios/899287437/85565d75eef215a62730950452fa82c3?v=1',
+        'https://static-s.aa-cdn.net/img/ios/547582577/5609f1bb627c74633acebd9724f65271?v=1',
       messages: [
         {author: 'Me', msg: 'asdasf', id: '1'},
         {author: 'Opponent', msg: 'vmfv', id: '2'},
@@ -30,7 +30,7 @@ const defaultState = {
     {
       username: 'Work',
       image:
-        'https://pbs.twimg.com/profile_images/1215443846307278848/0PxQ3Gck_400x400.png',
+        'https://static-s.aa-cdn.net/img/ios/547582577/5609f1bb627c74633acebd9724f65271?v=1',
       messages: [
         {author: 'Me', msg: 'asdasf', id: '1'},
         {author: 'Opponent', msg: 'vmmdl', id: '2'},

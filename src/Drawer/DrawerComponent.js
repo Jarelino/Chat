@@ -7,6 +7,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function DrawerComponent({
   appBg,
@@ -43,6 +44,9 @@ export default function DrawerComponent({
     },
     menuBlock: {
       padding: 20,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     btnBlock: {
       backgroundColor: 'blue',
@@ -75,30 +79,35 @@ export default function DrawerComponent({
           <TouchableOpacity
             onPress={menuHandler('AddChat')}
             style={styles.menuBlock}>
+            <Icon name="user-plus" size={20} color={textColor} />
             <Text style={styles.userText}>AddChat</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={menuHandler('Profile')}
             style={styles.menuBlock}>
+            <Icon name="user" size={20} color={textColor} />
             <Text style={styles.userText}>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={menuHandler('Settings')}
             style={styles.menuBlock}>
+            <Icon name="sliders" size={20} color={textColor} />
             <Text style={styles.userText}>Settings</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={menuHandler('ChatStack')}
             style={styles.menuBlock}>
+            <Icon name="message-circle" size={20} color={textColor} />
             <Text style={styles.userText}>Chats</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={menuHandler('Auth')}
+            style={styles.menuBlock}>
+            <Icon name="log-out" size={20} color={textColor} />
+            <Text style={styles.userText}>LogOut</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.btnBlock}
-        onPress={() => navigation.navigate('Auth')}>
-        <Text style={styles.btnText}>LogOut</Text>
-      </TouchableOpacity>
     </View>
   );
 }

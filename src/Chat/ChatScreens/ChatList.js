@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default class ChatList extends Component {
   constructor(props) {
@@ -11,9 +12,11 @@ export default class ChatList extends Component {
         backgroundColor: this.props.headerBg,
       },
       headerLeft: () => (
-        <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
-          <Text style={this.menuBtn(this.props.textColor)}>Menu</Text>
-        </TouchableOpacity>
+        <Icon
+          name="menu"
+          onPress={this.props.navigation.openDrawer}
+          style={this.styles.menuBtn}
+        />
       ),
     });
 
@@ -22,22 +25,6 @@ export default class ChatList extends Component {
       refresh: true,
     };
   }
-
-  appContainer = color => ({
-    backgroundColor: color,
-    flex: 1,
-    justifyContent: 'space-between',
-  });
-
-  menuBtn = color => ({
-    color,
-    margin: 10,
-  });
-
-  chatInfo = color => ({
-    marginLeft: 40,
-    color,
-  });
 
   componentDidMount = () => {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
@@ -112,17 +99,38 @@ export default class ChatList extends Component {
       alignItems: 'center',
       fontSize: 15,
       padding: 10,
-      borderWidth: 1,
-      borderTopWidth: 0,
+      borderBottomWidth: 1,
+      borderColor: '#0000001f',
     },
     lastMsg: {
       marginLeft: 40,
       color: '#b6baba',
     },
     chatImg: {
-      height: 50,
-      width: 50,
+      height: 55,
+      width: 55,
       borderRadius: 25,
     },
+    menuBtn: {
+      fontSize: 30,
+      margin: 10,
+      color: this.props.textColor,
+    },
+  });
+
+  appContainer = color => ({
+    backgroundColor: color,
+    flex: 1,
+    justifyContent: 'space-between',
+  });
+
+  menuBtn = color => ({
+    color,
+    margin: 10,
+  });
+
+  chatInfo = color => ({
+    marginLeft: 40,
+    color,
   });
 }

@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default class Chat extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class Chat extends Component {
       },
       headerLeft: () => (
         <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-          <Text style={this.styles.backBtn}>Back</Text>
+          <Icon name="arrow-left" style={this.styles.backBtn} />
         </TouchableOpacity>
       ),
       headerTintColor: this.props.textColor,
@@ -82,7 +83,7 @@ export default class Chat extends Component {
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Text style={this.styles.backBtn}>Back</Text>
+            <Icon name="arrow-left" style={this.styles.backBtn} />
           </TouchableOpacity>
         ),
         headerTintColor: this.props.textColor,
@@ -97,7 +98,7 @@ export default class Chat extends Component {
   render() {
     return (
       <View style={this.styles.container}>
-        {this.state.messages[0].hasOwnProperty() ? (
+        {this.state.messages[0].hasOwnProperty('msg') ? (
           <View>
             <FlatList
               data={this.state.messages}
@@ -133,10 +134,9 @@ export default class Chat extends Component {
             value={this.state.msg}
             placeholderTextColor="#b6baba"
           />
-          <Button
-            color="#3685FA"
+          <Icon
+            name="send"
             style={this.styles.sendBtn}
-            title="send"
             onPress={this.sendMsg}
           />
         </View>
@@ -162,6 +162,10 @@ export default class Chat extends Component {
     },
     sendBtn: {
       borderRadius: 0,
+      padding: 10,
+      fontSize: 20,
+      backgroundColor: '#3685FA',
+      color: '#fff',
     },
     myMsgContainer: {
       marginBottom: 5,
@@ -182,6 +186,7 @@ export default class Chat extends Component {
     },
     backBtn: {
       margin: 10,
+      fontSize: 30,
       color: this.props.textColor,
     },
   });

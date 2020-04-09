@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
-
 export default class ChatList extends Component {
   constructor(props) {
     super(props);

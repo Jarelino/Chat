@@ -1,19 +1,19 @@
-import {CHANGE_USERNAME_ACTION, CHANGE_PHONE_ACTION} from './actions';
+import {CHANGE_EMAIL_ACTION, CHANGE_PASSWORD_ACTION} from './actions';
 
 const defaultState = {
-  username: 'Roman',
-  phone: '+375295559684',
+  email: 'romayaruk@yandex.by',
+  password: 'someCoolPassword',
 };
 
 export const ProfileReducer = (state = defaultState, action) => {
   console.log(state, action);
   switch (action.type) {
-    case CHANGE_USERNAME_ACTION:
+    case CHANGE_EMAIL_ACTION:
       return {
         ...state,
         username: action.payload,
       };
-    case CHANGE_PHONE_ACTION:
+    case CHANGE_PASSWORD_ACTION:
       return {
         ...state,
         phone: action.payload,

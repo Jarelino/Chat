@@ -1,12 +1,12 @@
-export const CHANGE_USERNAME_ACTION = 'CHANGE_USERNAME_ACTION';
-export const CHANGE_PHONE_ACTION = 'CHANGE_PHONE_ACTION';
+export const CHANGE_EMAIL_ACTION = 'CHANGE_EMAIL_ACTION';
+export const CHANGE_PASSWORD_ACTION = 'CHANGE_PASSWORD_ACTION';
 
-export const ChangeUsername = username => ({
-  type: CHANGE_USERNAME_ACTION,
+export const ChangeEmail = username => ({
+  type: CHANGE_EMAIL_ACTION,
   payload: username,
 });
 
-export const ChangePhone = phone => ({
-  type: CHANGE_PHONE_ACTION,
+export const ChangePassword = phone => ({
+  type: CHANGE_PASSWORD_ACTION,
   payload: phone,
 });

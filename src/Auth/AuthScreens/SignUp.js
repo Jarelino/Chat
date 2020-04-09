@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -19,8 +20,7 @@ export default class SignUp extends Component {
       title: 'SignUp',
     });
     this.state = {
-      code: '',
-      confirmResult: '',
+      username: '',
     };
   }
 
@@ -53,53 +53,46 @@ export default class SignUp extends Component {
     marginBottom: 10,
   });
 
-  handlerChange = key => val => {
-    this.setState({[key]: val});
+  changeUsernameHandler = username => {
+    this.setState({username});
   };
 
-  changeNameHandler = name => this.props.ChangeUsername(name);
-  changePhoneHandler = phone => this.props.ChangePhone(phone);
+  changeEmailHandler = email => this.props.ChangeEmail(email);
+  changePasswordHandler = password => this.props.ChangePassword(password);
 
   submitHandler = async () => {
-    // if (!this.confirmResult) {
-    //   if (this.state.phone.length != 13) {
-    //     Alert.alert('Error', 'Wrong phone number');
-    //   } else if (this.state.name.length < 3 || this.state.name.length > 12) {
-    //     Alert.alert('Error', 'Allowed name length is 3-12 symbols');
-    //   } else {
-    //     Alert.alert('Verification', 'Enter code from sms');
-    //     this.setState({confirmResult: true});
-    //   }
-    // } else {
-    //   this.props.navigation.navigate('ChatList');
-    // }
-
-    this.props.navigation.navigate('ChatStack');
+    auth()
+      .createUserWithEmailAndPassword(this.props.email, this.props.password)
+      .then(() => {
+        auth().currentUser.updateProfile({displayName: this.state.username});
+        this.props.navigation.navigate('ChatStack');
+      })
+      .catch(error => console.log(error));
   };
 
   render() {
     return (
       <View style={this.appContainer(this.props.appBg)}>
         <TextInput
-          placeholder="Enter your phone number"
+          placeholder="Enter your email"
           keyboardType="number-pad"
           style={this.input(this.props.textColor)}
-          value={this.props.phone}
-          onChangeText={this.changePhoneHandler}
+          value={this.props.email}
+          onChangeText={this.changeEmailHandler}
+          placeholderTextColor="#b6baba"
+        />
+        <TextInput
+          placeholder={'Enter your password'}
+          style={this.input(this.props.textColor)}
+          value={this.props.password}
+          onChangeText={this.changePasswordHandler}
           placeholderTextColor="#b6baba"
         />
         <TextInput
           placeholder={'Enter your name'}
           style={this.input(this.props.textColor)}
-          value={this.props.username}
-          onChangeText={this.changeNameHandler}
-          placeholderTextColor="#b6baba"
-        />
-        <TextInput
-          placeholder={'Enter code from sms'}
-          style={this.input(this.props.textColor)}
-          value={this.state.code}
-          onChangeText={this.handlerChange('code')}
+          value={this.state.username}
+          onChangeText={this.changeUsernameHandler}
           placeholderTextColor="#b6baba"
         />
         <TouchableOpacity

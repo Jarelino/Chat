@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 
+import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
@@ -23,8 +24,8 @@ export default class SignIn extends Component {
     });
   }
 
-  changeNameHandler = name => this.props.ChangeUsername(name);
-  changePhoneHandler = phone => this.props.ChangePhone(phone);
+  changeEmailHandler = email => this.props.ChangeEmail(email);
+  changePasswordHandler = password => this.props.ChangePassword(password);
 
   componentDidMount = () => {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
@@ -60,35 +61,33 @@ export default class SignIn extends Component {
     this.props.navigation.navigate('SignUp');
   };
 
-  submitHandler = () => {
-    // if (this.state.phone.length != 13) {
-    //   Alert.alert('Error', 'Wrong phone number');
-    // } else if (this.state.name.length < 3 || this.state.name.length > 12) {
-    //   Alert.alert('Error', 'Allowed name length is 3-12 symbols');
-    // } else {
-    //   AsyncStorage.setItem('userPhone', this.state.phone);
-    //   this.props.navigation.navigate('ChatList');
-    // }
-
-    this.props.navigation.navigate('ChatStack');
+  submitHandler = async () => {
+    auth()
+      .signInWithEmailAndPassword(this.props.email, this.props.password)
+      .then(() => {
+        this.props.navigation.navigate('ChatStack');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
     return (
       <View style={this.appContainer(this.props.appBg)}>
         <TextInput
-          placeholder="Enter your phone number"
+          placeholder="Enter your email"
           keyboardType="number-pad"
           style={this.input(this.props.textColor)}
-          value={this.props.phone}
-          onChangeText={this.changePhoneHandler}
+          value={this.props.email}
+          onChangeText={this.changeEmailHandler}
           placeholderTextColor="#b6baba"
         />
         <TextInput
-          placeholder={'Enter your name'}
+          placeholder={'Enter your password'}
           style={this.input(this.props.textColor)}
-          value={this.props.username}
-          onChangeText={this.changeNameHandler}
+          value={this.props.password}
+          onChangeText={this.changePasswordHandler}
           placeholderTextColor="#b6baba"
         />
         <TouchableOpacity

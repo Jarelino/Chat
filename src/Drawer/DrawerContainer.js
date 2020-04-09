@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import DrawerComponent from './DrawerComponent';
-
+import auth from '@react-native-firebase/auth';
 class DrawerContainer extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class DrawerContainer extends Component {
       appBg: this.props.appBg,
       headerBg: this.props.headerBg,
       textColor: this.props.textColor,
-      username: this.props.username,
+      username: auth().currentUser.displayName,
       navigation: this.props.props.navigation,
       route: this.props.props.route,
     });
@@ -25,7 +25,6 @@ const mapStateToProps = state => {
     appBg: state.AppSettingsReducer.appBg,
     headerBg: state.AppSettingsReducer.headerBg,
     textColor: state.AppSettingsReducer.textColor,
-    username: state.ProfileReducer.username,
   };
 };
 

@@ -14,8 +14,6 @@ class ProfileContainer extends Component {
         appBg={this.props.appBg}
         headerBg={this.props.headerBg}
         textColor={this.props.textColor}
-        username={this.props.username}
-        phone={this.props.phone}
         navigation={this.props.navigation}
         route={this.props.route}
       />
@@ -28,8 +26,6 @@ const mapStateToProps = state => {
     appBg: state.AppSettingsReducer.appBg,
     headerBg: state.AppSettingsReducer.headerBg,
     textColor: state.AppSettingsReducer.textColor,
-    username: state.ProfileReducer.username,
-    phone: state.ProfileReducer.phone,
   };
 };
 

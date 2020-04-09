@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import ProfileContainer from './ProfileContainer';
-
+import auth from '@react-native-firebase/auth';
 export class ProfileScreen extends Component {
   constructor(props) {
     super(props);
@@ -45,10 +45,12 @@ export class ProfileScreen extends Component {
           }}
         />
         <View style={this.styles.infoContainer}>
-          <Text style={this.styles.username}>{this.props.username}</Text>
+          <Text style={this.styles.username}>
+            {auth().currentUser.displayName}
+          </Text>
         </View>
         <View>
-          <Text style={this.styles.phone}>{this.props.phone}</Text>
+          <Text style={this.styles.phone}>{auth().currentUser.email}</Text>
         </View>
       </View>
     );

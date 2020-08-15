@@ -11,12 +11,12 @@ export const ProfileReducer = (state = defaultState, action) => {
     case CHANGE_EMAIL_ACTION:
       return {
         ...state,
-        username: action.payload,
+        email: action.payload,
       };
     case CHANGE_PASSWORD_ACTION:
       return {
         ...state,
-        phone: action.payload,
+        password: action.payload,
       };
     default:
       return state;
